@@ -42,10 +42,8 @@ python -m venv venv
 ```cmd
 pip install -r requirements.txt
 ```
-**4. Ejecutar proyecto:**
-```cmd
-```
-**OPCIONAL: Levanta el servidor de Jupyter Notebook ejecutando:**
+**4. OPCIONAL: Ejecutar proyecto:**
+Levanta el servidor de Jupyter Notebook ejecutando
 ```cmd
 jupyter notebook
 ```
