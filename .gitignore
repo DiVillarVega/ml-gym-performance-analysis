@@ -1,0 +1,20 @@
+# Entornos virtuales
+venv/
+env/
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos temporales de Jupyter Notebook
+.ipynb_checkpoints/
+
+# Archivos del sistema operativo
+Thumbs.db
+.DS_Store
+
+# Opcional: Si tus modelos .pkl llegan a pesar más de 100MB (límite de GitHub), 
+# descomenta la siguiente línea para ignorarlos. Por ahora, con este dataset, subirán sin problema.
+# models/trained_models/*.pkl
