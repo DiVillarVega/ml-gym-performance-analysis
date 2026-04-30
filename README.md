@@ -33,13 +33,19 @@ Abre tu terminal (Símbolo del sistema o PowerShell) en la carpeta raíz del pro
 **1. Crear un entorno virtual:**
 ```cmd
 python -m venv venv
-
+```
 **2. Activar el entorno virtual:**
+```cmd
 .\venv\Scripts\activate
-
+```
 **3. Instalar dependencias:**
+```cmd
 pip install -r requirements.txt
-
+```
 **4. Ejecutar proyecto:**
-Levanta el servidor de Jupyter Notebook ejecutando:
+```cmd
+```
+**OPCIONAL: Levanta el servidor de Jupyter Notebook ejecutando:**
+```cmd
 jupyter notebook
+```
