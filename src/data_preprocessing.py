@@ -4,40 +4,40 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 def load_gym_data(filepath: str) -> pd.DataFrame:
     """
-    Carga el dataset de gimnasio con manejo de excepciones.
+    Carga el dataset de gimnasio con validación de existencia y contenido.
+    
+    Args:
+        filepath (str): Ruta al archivo CSV.
+    Returns:
+        pd.DataFrame: Datos cargados o None si hay error.
     """
     try:
         df = pd.read_csv(filepath)
+        if df.empty:
+            raise ValueError("El archivo CSV está vacío.")
         return df
-    except FileNotFoundError:
-        print(f"Error: No se encontró el archivo en la ruta {filepath}")
+    except (FileNotFoundError, ValueError) as e:
+        print(f"Error técnico en carga: {e}")
         return None
 
 def get_preprocessor() -> ColumnTransformer:
     """
-    Crea un ColumnTransformer para preprocesar variables numéricas y categóricas.
-    Excluye explícitamente variables objetivo como 'Fat_Percentage' o 'Experience_Level'.
+    Crea el motor de transformación para variables del gimnasio.
+    Asegura la escalabilidad y modularidad del pipeline.
+    
+    Returns:
+        ColumnTransformer: Pipeline de preprocesamiento configurado.
     """
-    # Definimos las columnas según el dataset
     numeric_features = [
         'Age', 'Weight (kg)', 'Height (m)', 'Max_BPM', 'Avg_BPM', 
         'Resting_BPM', 'Session_Duration (hours)', 'Water_Intake (liters)', 
         'Workout_Frequency (days/week)', 'BMI'
     ]
-    
     categorical_features = ['Gender', 'Workout_Type']
 
-    # Escalamos variables numéricas
-    numeric_transformer = StandardScaler()
-
-    # Codificamos variables categóricas
-    categorical_transformer = OneHotEncoder(handle_unknown='ignore')
-
-    # Ensamblamos el preprocesador
-    preprocessor = ColumnTransformer(
+    # Preprocesamiento modular: Escalado para numéricas y OneHot para categóricas
+    return ColumnTransformer(
         transformers=[
-            ('num', numeric_transformer, numeric_features),
-            ('cat', categorical_transformer, categorical_features)
+            ('num', StandardScaler(), numeric_features),
+            ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_features)
         ])
-    
-    return preprocessor
